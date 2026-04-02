@@ -29,16 +29,6 @@ const HERO_META = {
 
 const LETTERS = ["S", "H", "I", "P", "P", "S"];
 
-const CYCLE_FONTS = [
-  "var(--font-inter-tight), sans-serif",          // Inter Tight
-  "var(--font-jacquard-12), cursive",             // Jacquard 12
-  "var(--font-instrument-serif), serif",          // Instrument Serif
-  "var(--font-league-gothic), sans-serif",        // League Gothic
-  "-apple-system, 'SF Pro Display', sans-serif",  // San Francisco
-  "Futura, 'Century Gothic', sans-serif",         // Futura PT (system fallback)
-  "var(--font-jacquard-12), cursive",             // Jacquard 12 again for drama
-  "", // final: revert to font-black (Geist Sans)
-];
 
 const CARD_COUNT = 5;
 const Y_PER_DEPTH = 22;
@@ -88,19 +78,6 @@ export default function HeroIntro() {
       delay: 0.15,
     });
 
-    // ── Font cycling: shuffle through fonts, land on final ──
-    const word = wordRef.current!;
-    let fontIdx = 0;
-    // Start fast, slow down toward the end (slot-machine feel)
-    const delays = [60, 70, 80, 100, 120, 150, 200, 280];
-    const cycleFont = () => {
-      word.style.fontFamily = CYCLE_FONTS[fontIdx];
-      fontIdx++;
-      if (fontIdx < CYCLE_FONTS.length) {
-        setTimeout(cycleFont, delays[fontIdx - 1] ?? 200);
-      }
-    };
-    cycleFont();
 
     // ── Keep video stack + meta hidden until load ──
     gsap.set(videoRef.current, { opacity: 0, y: 24 });
