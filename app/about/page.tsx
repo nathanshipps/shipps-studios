@@ -20,29 +20,10 @@ const RESUME = [
     section: "Experience",
     items: [
       { years: "2018–Present", title: "Founder & Director", org: "Shipps Studios" },
-      { years: "2015–2018", title: "Director of Photography", org: "Freelance — Commercial & Documentary" },
-      { years: "2013–2015", title: "Camera Operator / Editor", org: "KING 5 News, Seattle" },
-    ],
-  },
-  {
-    section: "Education",
-    items: [
-      { years: "2013", title: "B.F.A. Film Production", org: "Loyola Marymount University" },
-      { years: "2011", title: "Study Abroad — Cinematography", org: "Prague Film School" },
-    ],
-  },
-  {
-    section: "Recognition",
-    items: [
-      { years: "2024", title: "Cannes Lions Shortlist", org: "Film Craft" },
-      { years: "2024", title: "Gold Clio", org: "Branded Entertainment" },
-      { years: "2023", title: "Official Selection", org: "Sundance Film Festival" },
-      { years: "2022", title: "Official Selection", org: "SXSW" },
+      { years: "2019–Present", title: "Riff Creative", org: "" },
     ],
   },
 ];
-
-const CLIENTS = ["Nike", "Patagonia", "National Geographic", "Bon Iver", "Sundance Institute", "Apple"];
 
 const PAD = "clamp(2rem, 8vw, 8rem)";
 
@@ -177,29 +158,6 @@ export default function About() {
         </section>
       ))}
 
-      <div style={{ height: "1px", background: "var(--border)", margin: `0 ${PAD}` }} />
-
-      {/* ── Clients ── */}
-      <section className="py-36" style={{ paddingLeft: PAD, paddingRight: PAD }}>
-        <div className="grid md:grid-cols-12 gap-12 md:gap-20">
-          <motion.div className="md:col-span-3" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-            <p className="font-mono text-[10px] tracking-[0.2em] uppercase" style={{ color: "var(--fg-subtle)" }}>
-              Clients
-            </p>
-          </motion.div>
-          <motion.div
-            className="md:col-span-9 flex flex-wrap gap-x-16 gap-y-4"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            {CLIENTS.map((c) => (
-              <span key={c} className="text-sm" style={{ color: "var(--fg-muted)" }}>
-                {c}
-              </span>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
     </main>
   );

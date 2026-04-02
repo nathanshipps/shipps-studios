@@ -205,7 +205,13 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                 <div className="absolute inset-0">
-                  <VideoEmbed source={section.source} controls muted={false} loop={false} />
+                  <VideoEmbed
+                    source={section.source}
+                    autoplay={section.autoplay ?? false}
+                    controls={section.controls ?? true}
+                    muted={section.muted ?? false}
+                    loop={section.loop ?? false}
+                  />
                 </div>
               </div>
               {section.caption && <p className="font-mono text-[10px] tracking-[0.15em] uppercase mt-4" style={{ color: "var(--fg-faint)" }}>{section.caption}</p>}
@@ -231,8 +237,15 @@ export default function CaseStudyClient({ project }: { project: Project }) {
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
               {section.images.map((img, j) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={j} src={img.url} alt={img.alt} className="w-full object-cover" />
+                section.tall ? (
+                  <div key={j} style={{ aspectRatio: "3/4", overflow: "hidden" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={img.url} alt={img.alt} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={j} src={img.url} alt={img.alt} className="w-full object-cover" />
+                )
               ))}
             </motion.div>
             {section.caption && <p className="font-mono text-[10px] tracking-[0.15em] uppercase mt-4" style={{ color: "var(--fg-faint)" }}>{section.caption}</p>}
@@ -272,10 +285,53 @@ export default function CaseStudyClient({ project }: { project: Project }) {
           </section>
         );
 
+        if (section.type === "splitStack") return (
+          <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}>
+            <motion.div
+              className="grid grid-cols-2 gap-3"
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            >
+              {/* Left — one tall image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={section.left.url} alt={section.left.alt} className="w-full object-cover" style={{ display: "block" }} />
+              {/* Right — stacked images filling same height as left */}
+              <div className="flex flex-col gap-3" style={{ alignSelf: "stretch" }}>
+                {section.right.map((img, j) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={j} src={img.url} alt={img.alt} className="w-full object-cover" style={{ flex: 1, minHeight: 0 }} />
+                ))}
+              </div>
+            </motion.div>
+            {section.caption && <p className="font-mono text-[10px] tracking-[0.15em] uppercase mt-4" style={{ color: "var(--fg-faint)" }}>{section.caption}</p>}
+          </section>
+        );
+
+        if (section.type === "stackLeft") return (
+          <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}>
+            <motion.div
+              className="grid grid-cols-2 gap-3"
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+            >
+              {/* Left — stacked images */}
+              <div className="flex flex-col gap-3" style={{ alignSelf: "stretch" }}>
+                {section.left.map((img, j) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={j} src={img.url} alt={img.alt} className="w-full object-cover" style={{ flex: 1, minHeight: 0 }} />
+                ))}
+              </div>
+              {/* Right — one tall image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={section.right.url} alt={section.right.alt} className="w-full object-cover" style={{ display: "block" }} />
+            </motion.div>
+            {section.caption && <p className="font-mono text-[10px] tracking-[0.15em] uppercase mt-4" style={{ color: "var(--fg-faint)" }}>{section.caption}</p>}
+          </section>
+        );
+
         if (section.type === "grid") return (
           <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}>
             <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 gap-3"
+              className="grid gap-3"
+              style={{ gridTemplateColumns: `repeat(${section.cols ?? 4}, minmax(0, 1fr))` }}
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
               {section.images.map((img, j) => (

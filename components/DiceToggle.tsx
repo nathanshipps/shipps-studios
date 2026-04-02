@@ -7,12 +7,14 @@ type Preset = {
   bg?: string;
   fg?: string;
   reset?: boolean; // if true, clear overrides and restore :root defaults
+  dark?: boolean;  // if true, apply data-theme="dark" with its CSS vars
 };
 
 const PRESETS: Preset[] = [
   { name: "forest", bg: "#283927", fg: "#39C135" },
   { name: "ocean",  bg: "#00146D", fg: "#1988FF" },
   { name: "ember",  bg: "#301B00", fg: "#FE6F00" },
+  { name: "dark",   dark: true },
   { name: "light",  reset: true },
 ];
 
@@ -26,6 +28,11 @@ function applyPreset(preset: Preset) {
   if (preset.reset) {
     OVERRIDE_VARS.forEach((v) => r.style.removeProperty(v));
     r.removeAttribute("data-theme");
+    return;
+  }
+  if (preset.dark) {
+    OVERRIDE_VARS.forEach((v) => r.style.removeProperty(v));
+    r.setAttribute("data-theme", "dark");
     return;
   }
   const { fg, bg } = preset as Required<Preset>;

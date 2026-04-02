@@ -18,7 +18,7 @@
 [data-theme="dark"] {
   --bg:          #1a1714;
   --fg:          #f0f0f0;
-  --accent:      #FFAC00;
+  --accent:      #3B82F6;
   --accent-2:    #8BA8BD;
   --fg-body:     #cccccc;
   --fg-muted:    #999999;
@@ -66,8 +66,8 @@ body {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg);
+  background: #000;
+  color: #fff;
 }
 
 ::-webkit-scrollbar { width: 3px; }

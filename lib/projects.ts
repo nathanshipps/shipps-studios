@@ -26,50 +26,16 @@ export interface Project {
 
 export type CaseStudySection =
   | { type: "text"; heading: string; body: string }
-  | { type: "video"; source: VideoSource; caption?: string }
+  | { type: "video"; source: VideoSource; caption?: string; autoplay?: boolean; controls?: boolean; muted?: boolean; loop?: boolean }
   | { type: "image"; url: string; alt: string; caption?: string }
-  | { type: "pair"; images: [{ url: string; alt: string }, { url: string; alt: string }]; caption?: string; small?: boolean }
-  | { type: "grid"; images: { url: string; alt: string }[]; caption?: string }
+  | { type: "pair"; images: [{ url: string; alt: string }, { url: string; alt: string }]; caption?: string; small?: boolean; tall?: boolean }
+  | { type: "grid"; images: { url: string; alt: string }[]; caption?: string; cols?: number }
   | { type: "carousel"; images: { url: string; alt: string }[]; caption?: string }
-  | { type: "stats"; items: { label: string; value: string }[] };
+  | { type: "stats"; items: { label: string; value: string }[] }
+  | { type: "splitStack"; left: { url: string; alt: string }; right: { url: string; alt: string }[]; caption?: string }
+  | { type: "stackLeft"; left: { url: string; alt: string }[]; right: { url: string; alt: string }; caption?: string };
 
 export const projects: Project[] = [
-  {
-    slug: "riffle-ranch",
-    title: "Riffle Ranch",
-    category: "Brand Film",
-    year: 2025,
-    client: "Riffle Ranch",
-    description:
-      "A cinematic portrait of a working ranch — land, livestock, and the people who tend both.",
-    thumbnail: "/images/riffle-ranch.png",
-    hero: { type: "vimeo", id: "1106263702", hash: "b3042e8f6d", startTime: 20, endTime: 27 },
-    caseStudy: {
-      overview:
-        "Riffle Ranch is a place defined by its relationship to the land. This film was built to capture that — the pace, the light, the quiet labor that doesn't make it into the brochure.",
-      role: ["Director", "Director of Photography", "Editor"],
-      challenge:
-        "Ranch life doesn't perform for cameras. The challenge was earning enough trust to be invisible — to document real work without turning it into a production.",
-      solution:
-        "We spent time on the property before we ever picked up a camera. When we did shoot, we kept the crew small, moved with the day rather than against it, and let the landscape do the heavy lifting.",
-      sections: [
-        {
-          type: "text",
-          heading: "The Approach",
-          body: "No shot lists. No call sheets beyond sunrise. We followed the rhythm of the ranch and found the film inside it.",
-        },
-        {
-          type: "stats",
-          items: [
-            { label: "Shoot Days", value: "4" },
-            { label: "Crew Size", value: "3" },
-            { label: "Location", value: "On-Site" },
-            { label: "Deliverables", value: "1 Film" },
-          ],
-        },
-      ],
-    },
-  },
   {
     slug: "the-columbian",
     title: "The Columbian",
@@ -78,22 +44,23 @@ export const projects: Project[] = [
     client: "The Columbian",
     description:
       "A brand campaign for one of the Pacific Northwest's oldest newspapers — showing the paper as part of people's lives, not a relic of the past.",
-    thumbnail: "/images/ColumbianBrandShoot-28.jpg",
+    thumbnail: "/images/ColumbianBrandShoot-18.jpg",
     hero: { type: "vimeo", id: "1146056329" },
     caseStudy: {
       overview:
         "The Columbian has been telling the Pacific Northwest's story for over 130 years. They needed a brand campaign that honored that history without getting buried by it — content that showed the paper as part of people's lives, not a relic of the past.",
       role: ["Director", "Director of Photography", "Photographer"],
       challenge:
-        "Legacy institutions face a specific problem: the equity they've built can start to feel like weight. The Columbian is deeply trusted, but trust alone doesn't attract new readers. The challenge was making the paper feel alive — something people actually reach for.",
+        "The Columbian needed to speak to two audiences at once — the loyal print readers who've had it on their doorstep for decades, and a younger generation that's never thought of a newspaper as part of their day. At the same time, the digital edition needed to be surfaced without undercutting the print product. The challenge was building a campaign that honored the physical paper while opening a door for people who'd only ever known news on a screen.",
       solution:
-        "We shot real readers in their real environments. No newsroom, no spokesperson. Just people with the paper — at the kitchen table, in the garden, in a study at night. The campaign argument was simple: this paper fits your life.",
+        "We leaned into a slower moment — the weight of the paper in your hands, the ritual of the morning read, a reminder of a time before every headline was fighting for your attention on a glowing rectangle. The campaign romanticized that tangible experience: real people, real homes, the paper as an object worth holding. Woven through it was the story of The Columbian itself — 130 years of showing up for this region, every morning, without fail. That legacy wasn't background. It was the argument.",
       sections: [
         {
-          type: "pair",
-          images: [
-            { url: "/images/ColumbianBrandShoot-18.jpg", alt: "Woman reading The Columbian at kitchen table" },
+          type: "splitStack",
+          left: { url: "/images/ColumbianBrandShoot-18.jpg", alt: "Woman reading The Columbian at kitchen table" },
+          right: [
             { url: "/images/ColumbianBrandShoot-28.jpg", alt: "The Columbian newspaper with coffee — still life" },
+            { url: "/images/ColumbianBrandShoot-50.jpg", alt: "Two men reading The Columbian at a restaurant" },
           ],
         },
         {
@@ -122,16 +89,28 @@ export const projects: Project[] = [
           ],
         },
         {
-          type: "pair",
-          images: [
-            { url: "/images/ColumbianBrandShoot-50.jpg", alt: "Two men reading The Columbian at a restaurant" },
-            { url: "/images/ColumbianBrandShoot-14.jpg", alt: "Woman on staircase reading The Columbian" },
+          type: "stackLeft",
+          left: [
+            { url: "/images/ColumbianBrandShoot-25.jpg", alt: "The Columbian" },
+            { url: "/images/ColumbianBrandShoot-44.jpg", alt: "The Columbian" },
           ],
+          right: { url: "/images/ColumbianBrandShoot-14.jpg", alt: "Woman on staircase reading The Columbian" },
+        },
+        {
+          type: "carousel",
+          images: [
+            { url: "/images/ColumbianBTS-1.jpg", alt: "Behind the scenes — The Columbian shoot" },
+            { url: "/images/ColumbianBTS-2.jpg", alt: "Behind the scenes — The Columbian shoot" },
+            { url: "/images/ColumbianBTS-3.jpg", alt: "Behind the scenes — The Columbian shoot" },
+            { url: "/images/ColumbianBTS-4.jpg", alt: "Behind the scenes — The Columbian shoot" },
+            { url: "/images/ColumbianBTS-5.jpg", alt: "Behind the scenes — The Columbian shoot" },
+          ],
+          caption: "Behind the scenes.",
         },
         {
           type: "stats",
           items: [
-            { label: "Est.", value: "1890" },
+            { label: "Crew Size", value: "3" },
             { label: "Shoot Days", value: "3" },
             { label: "Locations", value: "6" },
             { label: "Deliverables", value: "Film + Photos" },
@@ -143,21 +122,21 @@ export const projects: Project[] = [
   {
     slug: "dream-the-museum",
     title: "Dream The Museum",
-    category: "Narrative Short",
+    category: "Campaign Film",
     year: 2024,
-    client: "Independent",
+    client: "Columbia Play Project",
     description:
-      "A short film about a young girl navigating the border between imagination and the world around her.",
+      "A campaign film made to inspire a community to dream up a kids museum in Vancouver, WA. Told through the eyes of a child who's already living inside it.",
     thumbnail: "/images/dtm-still-02.png",
     hero: { type: "vimeo", id: "1033218792" },
     caseStudy: {
       overview:
-        "Dream The Museum follows a young girl whose interior world is as vivid and real as anything outside it. Shot over several days across a handful of intimate locations, the film is built around observation — catching a child in the act of being fully, completely herself.",
+        "Vancouver, WA doesn't have a kids museum. Dream The Museum is the campaign built to change that. This film was made to show the community what could exist, not through renderings or fundraising decks, but through the imagination of a child who's already dreaming it up.",
       role: ["Director", "Director of Photography", "Editor"],
       challenge:
-        "Working with a child lead means giving up control of the frame. You can set everything up perfectly and the moment will still belong to her. The challenge was building a structure loose enough to let that happen — then being ready when it did.",
+        "The ask was to get a community excited about something that doesn't exist yet. Concept art and capital campaigns don't do that. Feeling does. The challenge was making something emotionally true enough that people in Vancouver could watch it and think: we need this here.",
       solution:
-        "We kept the crew small, the camera low, and the days unscheduled enough to follow whatever was actually happening. Most of the film's best moments weren't planned. They were found.",
+        "We built every frame around the feeling of childhood imagination, not by stepping back, but by carefully crafting each moment to feel effortless. The creative direction was precise: the right environments, the right sequences, the right light — all in service of a specific kind of whimsy, soft and dreamy and completely sincere. The goal was to make wonder look inevitable. If the film does its job, you don't see the direction. You just feel the dream.",
       sections: [
         {
           type: "image",
@@ -189,7 +168,7 @@ export const projects: Project[] = [
         {
           type: "text",
           heading: "Behind the Lens",
-          body: "Shooting on location in a real family's home and garden meant working around the rhythms of an actual life. We didn't bring much in. The rocket ship was already there.",
+          body: "Small crew, limited time. We came in prepared but stayed loose — ready to adapt when the day called for it.",
         },
         {
           type: "carousel",
@@ -205,10 +184,91 @@ export const projects: Project[] = [
         {
           type: "stats",
           items: [
-            { label: "Shoot Days", value: "3" },
+            { label: "Shoot Days", value: "1" },
             { label: "Crew Size", value: "5" },
-            { label: "Locations", value: "2" },
+            { label: "Locations", value: "1" },
             { label: "Format", value: "Digital" },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    slug: "wool-and-prince",
+    title: "Wool & Prince",
+    category: "Brand Campaign",
+    year: 2025,
+    client: "Wool & Prince",
+    description: "A grounded brand campaign for clothing built to be worn hard — shot on a working farm in the Pacific Northwest.",
+    thumbnail: "/images/w&p - test shoot-27.jpg",
+    hero: { type: "image", url: "/images/w&p - test shoot-09.jpg", alt: "Wool & Prince campaign" },
+    caseStudy: {
+      overview: "Wool & Prince makes clothing from merino wool and natural fibers — built to wear hard, wash less, and get better with age. They needed content that matched the product's honesty. No mountain peaks, no golden hour. Just real clothes doing real things.",
+      role: ["Director", "Creative Direction", "Design", "Strategy"],
+      challenge: "Most clothing brands default to aspirational fantasy. Wool & Prince's audience doesn't buy that — they buy things that last. The challenge was making functional clothing feel genuinely compelling without reaching for clichés.",
+      solution: "I started with a full brand audit — dug into how Wool & Prince was showing up, where the messaging was falling flat, and what the brand actually stood for at its core. From that I built the strategy and concepted the photo shoot as the first place to put it into practice. I shot on a working farm in the Pacific Northwest. Muddy ground, overcast skies, sheep that had no interest in my shot list. I put the clothes through it and photographed what happened honestly.",
+      sections: [
+        {
+          type: "pair",
+          images: [
+            { url: "/images/w&p - test shoot-02.jpg", alt: "Wool & Prince fleece vest lifestyle" },
+            { url: "/images/w&p - test shoot-13.jpg", alt: "Wool & Prince plaid shirt at barn" },
+          ],
+        },
+        {
+          type: "text",
+          heading: "The Shoot",
+          body: "I didn't art direct the mud. I didn't move the animals. I found the frames that already existed inside the chaos of a working farm and let the product sit inside them. The result is images that feel like evidence rather than advertising.",
+        },
+        {
+          type: "pair",
+          images: [
+            { url: "/images/w&p - test shoot-11.jpg", alt: "Wool & Prince fleece vest on fence" },
+            { url: "/images/w&p - test shoot-01.jpg", alt: "Wool & Prince fleece zipper detail" },
+          ],
+          caption: "Fleece Vest — details.",
+        },
+        {
+          type: "image",
+          url: "/images/w&p - test shoot-35.jpg",
+          alt: "Wool & Prince tee on a hanger with sheep",
+          caption: "The brief: wear it hard.",
+        },
+        {
+          type: "text",
+          heading: "Digital Design",
+          body: "Beyond the shoot, I designed the landing page and product pages that the content would live inside. The goal was the same as the photography: make the clothes the center of gravity, not the chrome around them. Clean typography, generous white space, photography doing the selling.",
+        },
+        {
+          type: "pair",
+          images: [
+            { url: "/images/Landing Page ALT.png", alt: "Wool & Prince landing page" },
+            { url: "/images/FleeceProductPage.png", alt: "Fleece Vest product page" },
+          ],
+          caption: "Landing page + product page.",
+        },
+        {
+          type: "text",
+          heading: "Social",
+          body: "The shoot also fed a set of direct-response Instagram ads. Each ad was built around a single use case — work, travel, play, everyday — keeping the copy as spare as the photography. Performance-oriented but never loud.",
+        },
+        {
+          type: "grid",
+          images: [
+            { url: "/images/IG_W&P_Ad_01.png", alt: "Your new everyday pants — Instagram ad" },
+            { url: "/images/IG_W&P_Ad_02.png", alt: "Wool & Work — Instagram ad" },
+            { url: "/images/IG_W&P_Ad_03.png", alt: "Wool & Travel — Instagram ad" },
+            { url: "/images/IG_W&P_Ad_04.png", alt: "Wool & Play — Instagram ad" },
+          ],
+          caption: "Instagram ads — four variations.",
+        },
+        {
+          type: "stats",
+          items: [
+            { label: "Shoot Days", value: "1" },
+            { label: "Images Delivered", value: "80+" },
+            { label: "Digital Ads", value: "8" },
+            { label: "Location", value: "Portland" },
           ],
         },
       ],
@@ -221,30 +281,40 @@ export const projects: Project[] = [
     year: 2025,
     client: "onWater",
     description:
-      "A single-take visual journey through a decommissioned brutalist power station, scored to an unreleased track.",
+      "Motion design and art direction for onWater Fish — built to capture attention in a crowded outdoor recreation market.",
     thumbnail: "/images/onWaterLogo.png",
     hero: { type: "vimeo", id: "1152006062" },
     caseStudy: {
       overview:
-        "The band wanted something uncompromising and structural — a video that felt as considered as the music. We had one location, one take, and one chance to get it right.",
-      role: ["Director", "Director of Photography"],
+        "onWater Fish is one of the most powerful tools on the market for serious anglers. I handled motion design and art direction across paid social, product launches, and in-app experience — building a visual language that could sell the app, launch new features, and feel at home inside it.",
+      role: ["Motion Design", "Art Direction"],
       challenge:
-        "Executing a true oner in a space with no controllable power, extreme temperature variation, and a crew of 40 people who all had to be invisible to camera.",
+        "Outdoor and fishing brands compete hard for the same audience. Most content looks the same. The challenge was making ads that performed, a launch video that landed, and in-app motion that felt considered — all while keeping a consistent visual identity across very different contexts.",
       solution:
-        "Four months of rehearsal. We mapped every inch of the building, choreographed lighting cues triggered by timecode, and rehearsed the camera move — a two-kilometer dolly track — until it was muscle memory.",
+        "I created a monthly cadence of paid social ads, directed and designed the GTM launch video for their new AI product, and built the motion design system used inside the app itself. Each piece had a different job, but they all pulled from the same aesthetic — precise, dynamic, and built for people who take fishing seriously.",
       sections: [
         {
-          type: "text",
-          heading: "The Single Take",
-          body: "We had 12 hours in the building on shoot day. We ran the take 9 times. The version in the video is take 7 — imperfect in ways that made it true.",
+          type: "video",
+          source: { type: "vimeo", id: "1123007021" },
+          autoplay: true,
+          controls: false,
+          muted: true,
+          loop: true,
+        },
+        {
+          type: "video",
+          source: { type: "vimeo", id: "1001387254" },
+          autoplay: true,
+          controls: false,
+          muted: true,
+          loop: true,
         },
         {
           type: "stats",
           items: [
-            { label: "Rehearsal Days", value: "22" },
-            { label: "Takes on Shoot Day", value: "9" },
-            { label: "Dolly Track", value: "2km" },
-            { label: "Crew", value: "40" },
+            { label: "Deliverable", value: "Motion" },
+            { label: "Market", value: "Outdoor" },
+            { label: "Services", value: "Motion + Art Direction" },
           ],
         },
       ],
@@ -252,13 +322,13 @@ export const projects: Project[] = [
   },
   {
     slug: "terra",
-    title: "Terra",
+    title: "The River Sessions",
     category: "Brand Film",
     year: 2024,
     client: "Patagonia",
     description:
       "A cinematic brand film exploring Patagonia's commitment to regenerative agriculture and land stewardship.",
-    thumbnail: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80",
+    thumbnail: "/images/jeffreymartin.png",
     hero: { type: "vimeo", id: "148751763" },
     caseStudy: {
       overview:
@@ -292,81 +362,43 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "wool-and-prince",
-    title: "Wool & Prince",
-    category: "Brand Campaign",
-    year: 2024,
-    client: "Wool & Prince",
-    description: "A grounded brand campaign for clothing built to be worn hard — shot on a working farm in the Pacific Northwest.",
-    thumbnail: "/images/w&p - test shoot-27.jpg",
-    hero: { type: "image", url: "/images/w&p - test shoot-09.jpg", alt: "Wool & Prince campaign" },
+    slug: "riffle-ranch",
+    title: "Riffle Ranch",
+    category: "Brand Film",
+    year: 2025,
+    client: "Riffle Ranch",
+    description:
+      "A brand film for a Central Oregon ranch that hosts veterans — built around the land, the river, and the quiet that makes the place worth the trip.",
+    thumbnail: "/images/Still 2026-03-20 160941_1.1.1.png",
+    hero: { type: "vimeo", id: "1106263702", hash: "b3042e8f6d", startTime: 20, endTime: 27 },
     caseStudy: {
-      overview: "Wool & Prince makes clothing from merino wool and natural fibers — built to wear hard, wash less, and get better with age. They needed content that matched the product's honesty. No mountain peaks, no golden hour. Just real clothes doing real things.",
-      role: ["Director", "Photographer", "Creative Direction", "Digital Design"],
-      challenge: "Most clothing brands default to aspirational fantasy. Wool & Prince's audience doesn't buy that — they buy things that last. The challenge was making functional clothing feel genuinely compelling without reaching for clichés.",
-      solution: "We shot on a working farm in the Pacific Northwest over two days. Muddy ground, overcast skies, sheep that had no interest in our shot list. We put the clothes through it and photographed what happened honestly.",
+      overview:
+        "Riffle Ranch sits along a river in Central Oregon and opens its doors to veterans looking for somewhere to decompress. The fly fishing is world-class. They needed a film that showed guests what to expect — a showcase of everything the property has to offer.",
+      role: ["Director", "Director of Photography", "Editor"],
+      challenge:
+        "A place like this sells itself if you can get people to feel it. The challenge was translating something that's mostly about stillness and space into something that works on a screen.",
+      solution:
+        "We let the land lead. Wide water, open sky, a fly rod cutting through morning light. We kept the crew small, stayed out of the way, and trusted that the place was interesting enough to carry the film.",
       sections: [
         {
-          type: "pair",
-          images: [
-            { url: "/images/w&p - test shoot-02.jpg", alt: "Wool & Prince fleece vest lifestyle" },
-            { url: "/images/w&p - test shoot-13.jpg", alt: "Wool & Prince plaid shirt at barn" },
-          ],
-        },
-        {
-          type: "text",
-          heading: "The Shoot",
-          body: "We didn't art direct the mud. We didn't move the animals. We found the frames that already existed inside the chaos of a working farm and let the product sit inside them. The result is images that feel like evidence rather than advertising.",
-        },
-        {
-          type: "pair",
-          images: [
-            { url: "/images/w&p - test shoot-11.jpg", alt: "Wool & Prince fleece vest on fence" },
-            { url: "/images/w&p - test shoot-01.jpg", alt: "Wool & Prince fleece zipper detail" },
-          ],
-          caption: "Fleece Vest — details.",
-        },
-        {
-          type: "image",
-          url: "/images/w&p - test shoot-35.jpg",
-          alt: "Wool & Prince tee on a hanger with sheep",
-          caption: "The brief: wear it hard.",
-        },
-        {
-          type: "text",
-          heading: "Digital Design",
-          body: "Beyond the shoot, we designed the landing page and product pages that the content would live inside. The goal was the same as the photography: make the clothes the center of gravity, not the chrome around them. Clean typography, generous white space, photography doing the selling.",
-        },
-        {
-          type: "pair",
-          images: [
-            { url: "/images/Landing Page ALT.png", alt: "Wool & Prince landing page" },
-            { url: "/images/FleeceProductPage.png", alt: "Fleece Vest product page" },
-          ],
-          caption: "Landing page + product page.",
-        },
-        {
-          type: "text",
-          heading: "Social",
-          body: "The shoot also fed a set of direct-response Instagram ads. Each ad was built around a single use case — work, travel, play, everyday — keeping the copy as spare as the photography. Performance-oriented but never loud.",
-        },
-        {
           type: "grid",
+          cols: 3,
           images: [
-            { url: "/images/IG_W&P_Ad_01.png", alt: "Your new everyday pants — Instagram ad" },
-            { url: "/images/IG_W&P_Ad_02.png", alt: "Wool & Work — Instagram ad" },
-            { url: "/images/IG_W&P_Ad_03.png", alt: "Wool & Travel — Instagram ad" },
-            { url: "/images/IG_W&P_Ad_04.png", alt: "Wool & Play — Instagram ad" },
+            { url: "/images/Still 2026-04-01 174305_1.14.1.jpg", alt: "The river running through the Riffle Ranch property in Central Oregon" },
+            { url: "/images/Still 2026-04-01 174305_1.2.1.jpg", alt: "Angler fly fishing in the river" },
+            { url: "/images/Still 2026-04-01 174305_1.29.1.jpg", alt: "Two men watching anglers on the river at dusk" },
+            { url: "/images/Still 2026-04-01 174305_1.4.1.jpg", alt: "Hands holding a rainbow trout" },
+            { url: "/images/Still 2026-04-01 174305_1.16.1.jpg", alt: "Releasing a trout back into the river" },
+            { url: "/images/Still 2026-04-01 174305_1.28.1.jpg", alt: "Guest at glamping tent on the ranch property" },
           ],
-          caption: "Instagram ads — four variations.",
         },
         {
           type: "stats",
           items: [
             { label: "Shoot Days", value: "2" },
-            { label: "Images Delivered", value: "80+" },
-            { label: "Digital Ads", value: "4" },
-            { label: "Location", value: "PNW" },
+            { label: "Crew Size", value: "3" },
+            { label: "Location", value: "Oregon" },
+            { label: "Deliverables", value: "1 Film" },
           ],
         },
       ],
