@@ -1,5 +1,6 @@
 export type VideoSource =
   | { type: "vimeo"; id: string; hash?: string; startTime?: number; endTime?: number }
+  | { type: "youtube"; id: string }
   | { type: "mp4"; url: string };
 
 export type HeroMedia =
@@ -323,40 +324,42 @@ export const projects: Project[] = [
   {
     slug: "terra",
     title: "The River Sessions",
-    category: "Brand Film",
+    category: "Concert Film",
     year: 2024,
-    client: "Patagonia",
+    client: "River Sessions",
     description:
-      "A cinematic brand film exploring Patagonia's commitment to regenerative agriculture and land stewardship.",
+      "A film series bringing artists into the open air along the Columbia River — part concert, part campfire, part creative ritual.",
     thumbnail: "/images/RiverSessions_01.jpg",
-    hero: { type: "vimeo", id: "148751763" },
+    hero: { type: "youtube", id: "hXpXr1F-vt4" },
     caseStudy: {
       overview:
-        "Patagonia needed a film that could anchor their environmental campaign — something that felt earned and real, not corporate. We spent three weeks embedded on farms across Montana, California, and Patagonia.",
+        "We invite artists to share a song and a story — out of traditional venues and into something more personal. Set against the cinematic backdrop of the Columbia River, each session is part concert, part campfire, part creative ritual. Music, story, and landscape folding naturally into place.",
       role: ["Director", "Director of Photography", "Producer"],
       challenge:
-        "Environmental brand films can feel like greenwashing. The challenge was making something that advocates without preaching, and trusts the audience to draw their own conclusions.",
+        "Most live music content is built for stages and crowds. The challenge here was the opposite — stripping everything back until the artist, the song, and the landscape were the only things left in the frame. No production for production's sake.",
       solution:
-        "We led with the farmers and the land, not the brand. Patagonia appears once, in the closing card. Everything else is observation — real people, real work, real consequences.",
+        "We kept the crew small and the footprint light. Each session included a live performance film and an intimate artist conversation — a rare peek behind the curtain into the creative soul behind the song. The kind of thing you usually only hear in tour vans or on back porches.",
       sections: [
         {
+          type: "video",
+          source: { type: "youtube", id: "cXEAwzbkc1o" },
+          controls: true,
+          autoplay: false,
+          muted: false,
+          loop: false,
+        },
+        {
           type: "text",
-          heading: "Production Philosophy",
-          body: "We traveled with a crew of four. No lights, no art department, no interference. We worked with what each location gave us and let the subjects lead. The film was cut from 180 hours of observational footage.",
+          heading: "The Experience",
+          body: "Beyond the film, each River Session is a curated gathering — musicians, locals, and travelers brought together by a shared appreciation for place. Hospitality meets creative expression, shaped by the spirit of the Pacific Northwest.",
         },
         {
           type: "stats",
           items: [
-            { label: "Shoot Days", value: "21" },
-            { label: "Locations", value: "3 States + Patagonia" },
-            { label: "Crew Size", value: "4" },
-            { label: "Hours Shot", value: "180" },
+            { label: "Platform", value: "YouTube" },
+            { label: "Episodes", value: "4" },
+            { label: "Location", value: "Pacific Northwest" },
           ],
-        },
-        {
-          type: "text",
-          heading: "Impact",
-          body: "The film was used as a centerpiece for Patagonia's regenerative organic certified launch, screened at the United Nations Environment Assembly, and has been translated into 14 languages.",
         },
       ],
     },

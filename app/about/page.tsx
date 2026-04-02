@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import ContactModal from "@/components/ContactModal";
 
 const PAD = "clamp(2rem, 8vw, 8rem)";
 
 const META = [
   {
     label: "Currently",
-    lines: ["Director & Creative Lead", "Shipps Studios"],
+    lines: ["Director & Creative Lead"],
   },
   {
     label: "Based In",
@@ -33,6 +35,8 @@ const BIO = [
 ];
 
 export default function About() {
+  const [contactOpen, setContactOpen] = useState(false);
+
   return (
     <main className="min-h-screen" style={{ background: "var(--bg)", color: "var(--fg)" }}>
       <section
@@ -149,15 +153,27 @@ export default function About() {
               Let&apos;s make something.
             </h2>
           </div>
-          <a
-            href="mailto:nateshipps@gmail.com"
-            className="hover-accent font-mono tracking-[0.15em] transition-colors duration-300 shrink-0"
-            style={{ fontSize: "clamp(0.8rem, 1.2vw, 1rem)", color: "var(--fg-subtle)" }}
+          <button
+            onClick={() => setContactOpen(true)}
+            className="group relative font-mono uppercase transition-all duration-300 shrink-0 overflow-hidden"
+            style={{
+              background: "transparent",
+              color: "var(--fg)",
+              border: "1px solid var(--fg)",
+              borderRadius: 999,
+              padding: "0.85rem 2.25rem",
+              fontSize: "0.65rem",
+              letterSpacing: "0.35em",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--fg)"; e.currentTarget.style.color = "var(--bg)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--fg)"; }}
           >
-            nateshipps@gmail.com
-          </a>
+            Get In Touch →
+          </button>
         </motion.div>
       </section>
+
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </main>
   );
 }

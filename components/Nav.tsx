@@ -29,7 +29,7 @@ export default function Nav() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-10 py-10 transition-all duration-500"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-8 md:px-10 md:py-12 transition-all duration-500"
       style={{
         background: scrolled
           ? "linear-gradient(135deg, color-mix(in srgb, var(--bg) 55%, transparent) 0%, color-mix(in srgb, var(--bg) 35%, transparent) 100%)"
@@ -45,23 +45,23 @@ export default function Nav() {
     >
       <Link
         href="/"
-        className="font-mono text-[13px] tracking-[0.25em] uppercase transition-colors duration-300"
+        className="font-mono text-[14px] tracking-[0.25em] uppercase transition-colors duration-300"
         style={{ color: "var(--fg)" }}
       >
         Nate Shipps
       </Link>
 
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-5 md:gap-8">
         <Link
           href="/work"
-          className="font-mono text-[13px] tracking-[0.2em] uppercase transition-colors duration-300"
+          className="font-mono text-[14px] tracking-[0.2em] uppercase transition-colors duration-300"
           style={{ color: pathname === "/work" ? "var(--fg)" : "var(--fg-subtle)" }}
         >
           Work
         </Link>
         <Link
           href="/about"
-          className="font-mono text-[13px] tracking-[0.2em] uppercase transition-colors duration-300"
+          className="font-mono text-[14px] tracking-[0.2em] uppercase transition-colors duration-300"
           style={{ color: pathname === "/about" ? "var(--fg)" : "var(--fg-subtle)" }}
         >
           About

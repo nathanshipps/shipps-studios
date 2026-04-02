@@ -264,7 +264,7 @@ export default function HeroIntro() {
             {/* Card labels */}
             {(CARDS[i].label || CARDS[i].year) && (
               <div
-                className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-8 pb-7 pointer-events-none"
+                className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-4 pb-4 md:px-8 md:pb-7 pointer-events-none"
                 style={{ background: "linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%)", paddingTop: "3rem" }}
               >
                 <span className="font-mono text-[12px] tracking-[0.15em]" style={{ color: "rgba(255,255,255,0.85)" }}>

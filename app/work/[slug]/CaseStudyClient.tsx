@@ -77,7 +77,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
 
         {/* Meta strip */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-10"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10"
           style={{ borderTop: "1px solid var(--border)" }}
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.3 }}
         >
@@ -123,7 +123,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
           <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
             <div className="absolute inset-0">
               <VideoEmbed
-                source={project.hero as Extract<HeroMedia, { type: "vimeo" | "mp4" }>}
+                source={project.hero as Extract<HeroMedia, { type: "vimeo" | "youtube" | "mp4" }>}
                 autoplay={false}
                 controls={true}
                 muted={false}
@@ -155,7 +155,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
 
       {/* ── CHALLENGE / SOLUTION ── */}
       <section style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)", borderTop: "1px solid var(--border)" }}>
-        <div className="grid md:grid-cols-2 gap-12 pt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-12">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <Label>Challenge</Label>
             <p className="mt-6 leading-relaxed" style={{ color: "var(--fg-body)" }}>{project.caseStudy.challenge}</p>
@@ -185,7 +185,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         if (section.type === "stats") return (
           <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)", borderTop: "1px solid var(--border)" }}>
             <motion.div
-              className="grid grid-cols-2 md:grid-cols-4 pt-12 gap-12"
+              className="grid grid-cols-2 md:grid-cols-4 pt-12 gap-8"
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
               {section.items.map((item) => (
@@ -232,7 +232,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         if (section.type === "pair") return (
           <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}>
             <motion.div
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               style={section.small ? { maxWidth: "55%", margin: "0 auto" } : undefined}
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
@@ -259,6 +259,10 @@ export default function CaseStudyClient({ project }: { project: Project }) {
                 style={{
                   display: "flex",
                   gap: "0.75rem",
+                  overflowX: "auto",
+                  WebkitOverflowScrolling: "touch",
+                  scrollSnapType: "x mandatory",
+                  paddingBottom: "0.5rem",
                 }}
               >
                 {section.images.map((img, j) => (
@@ -269,9 +273,11 @@ export default function CaseStudyClient({ project }: { project: Project }) {
                     alt={img.alt}
                     style={{
                       height: "clamp(180px, 25vw, 360px)",
-                      flex: 1,
+                      flex: "0 0 auto",
+                      width: "clamp(200px, 35vw, 400px)",
                       objectFit: "cover",
                       borderRadius: 4,
+                      scrollSnapAlign: "start",
                     }}
                   />
                 ))}
@@ -288,7 +294,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         if (section.type === "splitStack") return (
           <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}>
             <motion.div
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
               {/* Left — one tall image */}
@@ -309,7 +315,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         if (section.type === "stackLeft") return (
           <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}>
             <motion.div
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
               {/* Left — stacked images */}
@@ -332,6 +338,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             <motion.div
               className="grid gap-3"
               style={{ gridTemplateColumns: `repeat(${section.cols ?? 4}, minmax(0, 1fr))` }}
+              data-mobile-grid
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
               {section.images.map((img, j) => (

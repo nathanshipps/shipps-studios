@@ -104,6 +104,30 @@ export default function VideoEmbed({
     );
   }
 
+  if (source.type === "youtube") {
+    const params = new URLSearchParams({
+      controls: controls ? "1" : "0",
+      autoplay: autoplay ? "1" : "0",
+      mute: muted ? "1" : "0",
+      loop: loop ? "1" : "0",
+      playlist: source.id,
+      rel: "0",
+      modestbranding: "1",
+    });
+
+    return (
+      <div className={`relative w-full h-full ${className}`}>
+        <iframe
+          src={`https://www.youtube.com/embed/${source.id}?${params}`}
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          style={{ border: "none", position: "absolute", inset: 0, width: "100%", height: "100%" }}
+          title="Video"
+        />
+      </div>
+    );
+  }
+
   // MP4
   return (
     <div className={`relative w-full h-full ${className}`}>
