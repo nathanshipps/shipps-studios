@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 
 const IMAGES = [
-  "/images/BTS photos/ColumbianBTS-2.jpg",
-  "/images/BTS photos/ColumbianBTS-3.jpg",
-  "/images/BTS photos/Untitled-1.jpg",
+  "/images/BTS Photos/ColumbianBTS-2.jpg",
+  "/images/BTS Photos/ColumbianBTS-3.jpg",
+  "/images/BTS Photos/Untitled-1.jpg",
 ];
 
 export default function ImageFlicker() {
