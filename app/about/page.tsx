@@ -64,7 +64,7 @@ export default function About() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/headshotnate.png"
+              src="/images/nateheadshot.jpg"
               alt="Nate Shipps on set"
               className="w-full rounded-sm object-cover"
               style={{ aspectRatio: "3/4" }}

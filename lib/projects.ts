@@ -328,7 +328,7 @@ export const projects: Project[] = [
     client: "Patagonia",
     description:
       "A cinematic brand film exploring Patagonia's commitment to regenerative agriculture and land stewardship.",
-    thumbnail: "/images/jeffreymartin.png",
+    thumbnail: "/images/RiverSessions_01.jpg",
     hero: { type: "vimeo", id: "148751763" },
     caseStudy: {
       overview:
