@@ -1,4 +1,5 @@
 import HeroIntro from "@/components/HeroIntro";
+import ImageFlicker from "@/components/ImageFlicker";
 
 export default function Home() {
   return (
@@ -15,17 +16,27 @@ export default function Home() {
           borderTop: "1px solid var(--border)",
         }}
       >
-        <p
-          className="font-bold leading-tight tracking-tight"
-          style={{
-            fontFamily: "var(--font-instrument-sans)",
-            fontSize: "clamp(1.8rem, 4vw, 3.5rem)",
-            color: "var(--fg)",
-            maxWidth: "16ch",
-          }}
-        >
-          Creative production lead with over 6 years of experience across film, design, photo, and events.
-        </p>
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <p
+            className="font-bold leading-tight tracking-tight"
+            style={{
+              fontFamily: "var(--font-instrument-sans)",
+              fontSize: "clamp(1.8rem, 4vw, 3.5rem)",
+              color: "var(--fg)",
+            }}
+          >
+            Creative leader with 7 years of experience across{" "}
+            <span style={{ color: "#888888" }}>
+              <span className="service-tag service-film">film</span>,{" "}
+              <span className="service-tag service-design">design</span>,{" "}
+              <span className="service-tag service-photo">photo</span>, and{" "}
+              <span className="service-tag service-events">events</span>.
+            </span>
+          </p>
+          <div style={{ maxWidth: "520px", marginLeft: "auto" }}>
+            <ImageFlicker />
+          </div>
+        </div>
       </section>
 
     </main>

@@ -314,7 +314,7 @@ export const projects: Project[] = [
           items: [
             { label: "Deliverable", value: "Motion" },
             { label: "Market", value: "Outdoor" },
-            { label: "Services", value: "Motion + Art Direction" },
+            { label: "Services", value: "Motion Design" },
           ],
         },
       ],

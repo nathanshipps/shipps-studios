@@ -14,7 +14,8 @@ const PRESETS: Preset[] = [
   { name: "forest", bg: "#283927", fg: "#39C135" },
   { name: "ocean",  bg: "#00146D", fg: "#1988FF" },
   { name: "ember",  bg: "#301B00", fg: "#FE6F00" },
-  { name: "dark",   dark: true },
+  { name: "rouge",  bg: "#1A0008", fg: "#FF6B8A" },
+  { name: "dark",   bg: "#000000", fg: "#ffffff" },
   { name: "light",  reset: true },
 ];
 

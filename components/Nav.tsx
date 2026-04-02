@@ -66,14 +66,6 @@ export default function Nav() {
         >
           About
         </Link>
-        <Link
-          href="/contact"
-          className="font-mono text-[13px] tracking-[0.2em] uppercase transition-colors duration-300"
-          style={{ color: pathname === "/contact" ? "var(--fg)" : "var(--fg-subtle)" }}
-        >
-          Contact
-        </Link>
-
         <DiceToggle />
       </div>
     </nav>
