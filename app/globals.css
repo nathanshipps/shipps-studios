@@ -87,4 +87,9 @@ body {
   [data-mobile-grid] {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
+
+  /* Pull hero cards up so SHIPPS wordmark sits behind them */
+  .hero-cards {
+    top: 18% !important;
+  }
 }

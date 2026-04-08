@@ -176,7 +176,7 @@ export default function HeroIntro() {
       {/* ── CARD STACK ── */}
       <div
         ref={videoRef}
-        className="absolute z-20"
+        className="absolute z-20 hero-cards"
         style={{ top: "34%", left: "5%", right: "5%", bottom: "11%" }}
       >
         {Array.from({ length: CARD_COUNT }).map((_, i) => (
