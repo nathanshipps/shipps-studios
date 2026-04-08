@@ -26,11 +26,10 @@ export default function Nav() {
 
   useEffect(() => {
     if (!navRef.current) return;
-    gsap.fromTo(
-      navRef.current,
-      { y: -20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.2 }
-    );
+    gsap.from(navRef.current, {
+      y: -20, opacity: 0, duration: 1, ease: "power3.out", delay: 0.2,
+      clearProps: "opacity,transform",
+    });
   }, []);
 
   // Close menu on route change
