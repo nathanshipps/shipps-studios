@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { projects } from "@/lib/projects";
 import { useState } from "react";
 
@@ -46,15 +47,16 @@ export default function WorkPage() {
                 background: "var(--fg-faint)",
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={project.thumbnail}
                 alt={project.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
                 style={{
                   transform: hovered === project.slug ? "scale(1.03)" : "scale(1)",
                   transition: "transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
 

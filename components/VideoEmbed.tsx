@@ -87,6 +87,7 @@ export default function VideoEmbed({
           ref={iframeRef}
           src={`https://player.vimeo.com/video/${source.id}?${params}`}
           allow="autoplay; fullscreen; picture-in-picture"
+          loading="lazy"
           style={{
             border: "none",
             position: "absolute",
@@ -121,6 +122,7 @@ export default function VideoEmbed({
           src={`https://www.youtube.com/embed/${source.id}?${params}`}
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
+          loading="lazy"
           style={{ border: "none", position: "absolute", inset: 0, width: "100%", height: "100%" }}
           title="Video"
         />

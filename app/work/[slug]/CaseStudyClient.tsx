@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import VideoEmbed from "@/components/VideoEmbed";
 import type { Project, HeroMedia } from "@/lib/projects";
@@ -112,13 +113,16 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}
       >
         {project.hero.type === "image" ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={(project.hero as Extract<HeroMedia, { type: "image" }>).url}
-            alt={(project.hero as Extract<HeroMedia, { type: "image" }>).alt ?? project.title}
-            className="w-full object-cover"
-            style={{ maxHeight: "80vh" }}
-          />
+          <div className="relative w-full" style={{ maxHeight: "80vh", aspectRatio: "16/9", overflow: "hidden" }}>
+            <Image
+              src={(project.hero as Extract<HeroMedia, { type: "image" }>).url}
+              alt={(project.hero as Extract<HeroMedia, { type: "image" }>).alt ?? project.title}
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          </div>
         ) : (
           <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
             <div className="absolute inset-0">
@@ -222,8 +226,7 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         if (section.type === "image") return (
           <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={section.url} alt={section.alt} className="w-full object-cover" />
+              <Image src={section.url} alt={section.alt} width={1600} height={900} className="w-full object-cover" sizes="100vw" />
               {section.caption && <p className="font-mono text-[10px] tracking-[0.15em] uppercase mt-4" style={{ color: "var(--fg-faint)" }}>{section.caption}</p>}
             </motion.div>
           </section>
@@ -238,13 +241,11 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             >
               {section.images.map((img, j) => (
                 section.tall ? (
-                  <div key={j} style={{ aspectRatio: "3/4", overflow: "hidden" }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={img.url} alt={img.alt} className="w-full h-full object-cover" />
+                  <div key={j} style={{ aspectRatio: "3/4", overflow: "hidden", position: "relative" }}>
+                    <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="50vw" />
                   </div>
                 ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img key={j} src={img.url} alt={img.alt} className="w-full object-cover" />
+                  <Image key={j} src={img.url} alt={img.alt} width={1200} height={800} className="w-full object-cover" sizes="50vw" />
                 )
               ))}
             </motion.div>
@@ -266,20 +267,9 @@ export default function CaseStudyClient({ project }: { project: Project }) {
                 }}
               >
                 {section.images.map((img, j) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={j}
-                    src={img.url}
-                    alt={img.alt}
-                    style={{
-                      height: "clamp(180px, 25vw, 360px)",
-                      flex: "0 0 auto",
-                      width: "clamp(200px, 35vw, 400px)",
-                      objectFit: "cover",
-                      borderRadius: 4,
-                      scrollSnapAlign: "start",
-                    }}
-                  />
+                  <div key={j} style={{ flex: "0 0 auto", width: "clamp(200px, 35vw, 400px)", height: "clamp(180px, 25vw, 360px)", position: "relative", borderRadius: 4, overflow: "hidden", scrollSnapAlign: "start" }}>
+                    <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="35vw" />
+                  </div>
                 ))}
               </div>
               {section.caption && (
@@ -298,13 +288,15 @@ export default function CaseStudyClient({ project }: { project: Project }) {
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
               {/* Left — one tall image */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={section.left.url} alt={section.left.alt} className="w-full object-cover" style={{ display: "block" }} />
+              <div style={{ position: "relative", minHeight: 300 }}>
+                <Image src={section.left.url} alt={section.left.alt} fill className="object-cover" sizes="50vw" />
+              </div>
               {/* Right — stacked images filling same height as left */}
               <div className="flex flex-col gap-3" style={{ alignSelf: "stretch" }}>
                 {section.right.map((img, j) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img key={j} src={img.url} alt={img.alt} className="w-full object-cover" style={{ flex: 1, minHeight: 0 }} />
+                  <div key={j} style={{ position: "relative", flex: 1, minHeight: 150 }}>
+                    <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="50vw" />
+                  </div>
                 ))}
               </div>
             </motion.div>

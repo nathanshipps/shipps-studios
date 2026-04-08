@@ -60,6 +60,13 @@ export default function Nav() {
           Work
         </Link>
         <Link
+          href="/photo"
+          className="font-mono text-[14px] tracking-[0.2em] uppercase transition-colors duration-300"
+          style={{ color: pathname === "/photo" ? "var(--fg)" : "var(--fg-subtle)" }}
+        >
+          Photo
+        </Link>
+        <Link
           href="/about"
           className="font-mono text-[14px] tracking-[0.2em] uppercase transition-colors duration-300"
           style={{ color: pathname === "/about" ? "var(--fg)" : "var(--fg-subtle)" }}

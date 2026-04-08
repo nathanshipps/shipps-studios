@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import ContactModal from "@/components/ContactModal";
 
@@ -56,13 +57,16 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/NateHeadshot.jpg"
-              alt="Nate Shipps"
-              className="w-full rounded-sm object-cover"
-              style={{ aspectRatio: "3/4" }}
-            />
+            <div className="relative w-full rounded-sm overflow-hidden" style={{ aspectRatio: "3/4" }}>
+              <Image
+                src="/images/NateHeadshot.jpg"
+                alt="Nate Shipps"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
+                priority
+              />
+            </div>
 
             <div className="flex flex-col gap-6">
               {META.map(({ label, lines, href }) => (

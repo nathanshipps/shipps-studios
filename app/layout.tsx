@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import {
   Geist, Geist_Mono, Instrument_Sans, Instrument_Serif,
-  League_Gothic, Inter_Tight, Jacquard_12,
 } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
@@ -11,40 +10,27 @@ import ThemeProvider from "@/components/ThemeProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const leagueGothic = League_Gothic({
-  variable: "--font-league-gothic",
-  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  display: "swap",
 });
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   subsets: ["latin"],
   weight: "400",
-});
-
-const interTight = Inter_Tight({
-  variable: "--font-inter-tight",
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
-});
-
-const jacquard12 = Jacquard_12({
-  variable: "--font-jacquard-12",
-  subsets: ["latin"],
-  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -60,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSans.variable} ${leagueGothic.variable} ${instrumentSerif.variable} ${interTight.variable} ${jacquard12.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSans.variable} ${instrumentSerif.variable} antialiased`}
     >
       <body className="min-h-screen overflow-x-hidden">
         <ThemeProvider>
