@@ -56,7 +56,8 @@ export default function WorkPage() {
                   transform: hovered === project.slug ? "scale(1.03)" : "scale(1)",
                   transition: "transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 }}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                quality={90}
               />
             </div>
 

@@ -2,7 +2,7 @@
 
 /* ── Light theme (default) ── */
 :root {
-  --bg:          #ffffff;
+  --bg:          #f4f0eb;
   --fg:          #1c1814;
   --accent:      #888888;
   --accent-2:    #5A82A0;
@@ -11,7 +11,7 @@
   --fg-subtle:   #8a8278;
   --fg-faint:    #9a9490;
   --border:      rgba(28, 24, 20, 0.08);
-  --gradient-from: #ffffff;
+  --gradient-from: #f4f0eb;
 }
 
 /* ── Dark theme ── */
