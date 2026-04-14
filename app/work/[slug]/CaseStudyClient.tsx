@@ -284,19 +284,19 @@ export default function CaseStudyClient({ project }: { project: Project }) {
         if (section.type === "splitStack") return (
           <section key={i} style={{ paddingLeft: PAD, paddingRight: PAD, paddingBottom: "clamp(4rem, 8vw, 7rem)" }}>
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch"
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             >
-              {/* Left — one tall image */}
-              <div style={{ position: "relative", minHeight: 300 }}>
-                <Image src={section.left.url} alt={section.left.alt} fill className="object-cover" sizes="50vw" />
+              {/* Left — cropped to match height of right stack */}
+              <div style={{ position: "relative", overflow: "hidden" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={section.left.url} alt={section.left.alt} className="absolute inset-0 w-full h-full object-cover object-bottom" />
               </div>
-              {/* Right — stacked images filling same height as left */}
-              <div className="flex flex-col gap-3" style={{ alignSelf: "stretch" }}>
+              {/* Right — stacked images at natural aspect ratio, define the height */}
+              <div className="flex flex-col gap-3">
                 {section.right.map((img, j) => (
-                  <div key={j} style={{ position: "relative", flex: 1, minHeight: 150 }}>
-                    <Image src={img.url} alt={img.alt} fill className="object-cover" sizes="50vw" />
-                  </div>
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={j} src={img.url} alt={img.alt} className="w-full" style={{ display: "block" }} />
                 ))}
               </div>
             </motion.div>

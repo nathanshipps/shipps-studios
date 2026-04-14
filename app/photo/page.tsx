@@ -6,42 +6,65 @@ import { useState, useEffect } from "react";
 
 const PAD = "clamp(1.5rem, 5vw, 5rem)";
 
-const PHOTOS = [
-  { src: "/images/Photos Page/L1030711.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/Freres_Tour-42.jpg",         alt: "Freres Tour"               },
-  { src: "/images/Photos Page/L1060012.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1091845.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/ColumbianBrandShoot-14.jpg", alt: "The Columbian brand shoot" },
-  { src: "/images/Photos Page/L1070674.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/Freres_Tour-44.jpg",         alt: "Freres Tour"               },
-  { src: "/images/Photos Page/L1021024.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1030796.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/Freres_Tour-38.jpg",         alt: "Freres Tour"               },
-  { src: "/images/Photos Page/L1040859.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1070790.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/Lake_LaborDay24-67.jpg",     alt: "Lake Labor Day"            },
-  { src: "/images/Photos Page/L1010564.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/Freres_Tour-43.jpg",         alt: "Freres Tour"               },
-  { src: "/images/Photos Page/L1050077.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1030729.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/RiverSessions_01.jpg",       alt: "River Sessions"            },
-  { src: "/images/Photos Page/L1061034.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1020832.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1070689.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1040173.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1061047.jpg",               alt: "Photo"                     },
-  { src: "/images/Photos Page/L1030210.jpg",               alt: "Photo"                     },
+type Category = "lifestyle" | "architecture";
+
+const PHOTOS: { src: string; alt: string; category: Category }[] = [
+  { src: "/images/Photos Page/L1030711.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/Freres_Tour-42.jpg",         alt: "Freres Tour",               category: "architecture" },
+  { src: "/images/Photos Page/L1060012.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1091845.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/ColumbianBrandShoot-14.jpg", alt: "The Columbian brand shoot", category: "architecture" },
+  { src: "/images/Photos Page/L1070674.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/Freres_Tour-33.jpg",         alt: "Freres Tour",               category: "architecture" },
+  { src: "/images/Photos Page/Freres_Tour-41.jpg",         alt: "Freres Tour",               category: "architecture" },
+  { src: "/images/Photos Page/Freres_Tour-44.jpg",         alt: "Freres Tour",               category: "architecture" },
+  { src: "/images/Photos Page/L1021024.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1030796.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/Freres_Tour-38.jpg",         alt: "Freres Tour",               category: "architecture" },
+  { src: "/images/Photos Page/L1040859.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1040871.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1070790.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/Lake_LaborDay24-67.jpg",     alt: "Lake Labor Day",            category: "lifestyle" },
+  { src: "/images/Photos Page/L1010564.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/Freres_Tour-43.jpg",         alt: "Freres Tour",               category: "architecture" },
+  { src: "/images/Photos Page/L1050077.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1030729.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/RiverSessions_01.jpg",       alt: "River Sessions",            category: "lifestyle" },
+  { src: "/images/Photos Page/LSW_MemorialStadium-13-2.jpg", alt: "LSW Memorial Stadium",   category: "architecture" },
+  { src: "/images/Photos Page/LSW_MemorialStadium-23.jpg",   alt: "LSW Memorial Stadium",   category: "architecture" },
+  { src: "/images/Photos Page/EvergreenHS-SkillsBuilding-08.jpg", alt: "Evergreen HS Skills Building", category: "architecture" },
+  { src: "/images/Photos Page/EvergreenHS-SkillsBuilding-10.jpg", alt: "Evergreen HS Skills Building", category: "architecture" },
+  { src: "/images/Photos Page/RidgefieldGreelyBuilding-14.jpg", alt: "Ridgefield Greely Building", category: "architecture" },
+  { src: "/images/Photos Page/Vita_Commons_Wide.jpg",        alt: "Vita Commons",            category: "architecture" },
+  { src: "/images/Photos Page/Vita_LightSensor.jpg",         alt: "Vita",                    category: "architecture" },
+  { src: "/images/Photos Page/OutTheDoorFall24-25.jpg",      alt: "Out The Door Fall 24",    category: "architecture" },
+  { src: "/images/Photos Page/OutTheDoorFall24-22.jpg",      alt: "Out The Door Fall 24",    category: "architecture" },
+  { src: "/images/Photos Page/L1060708.jpg",                 alt: "Photo",                   category: "architecture" },
+  { src: "/images/Photos Page/L1061034.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1020832.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1070689.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1040173.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1061047.jpg",               alt: "Photo",                     category: "lifestyle" },
+  { src: "/images/Photos Page/L1030210.jpg",               alt: "Photo",                     category: "lifestyle" },
+];
+
+const FILTERS: { label: string; value: Category | null }[] = [
+  { label: "All", value: null },
+  { label: "Lifestyle", value: "lifestyle" },
+  { label: "Spaces", value: "architecture" },
 ];
 
 export default function PhotoPage() {
+  const [activeFilter, setActiveFilter] = useState<Category | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const lightbox = lightboxIndex !== null ? PHOTOS[lightboxIndex].src : null;
+  const filtered = activeFilter ? PHOTOS.filter((p) => p.category === activeFilter) : PHOTOS;
+  const lightbox = lightboxIndex !== null ? filtered[lightboxIndex].src : null;
 
   const openLightbox = (i: number) => setLightboxIndex(i);
   const closeLightbox = () => setLightboxIndex(null);
-  const prev = () => setLightboxIndex((i) => (i !== null ? (i - 1 + PHOTOS.length) % PHOTOS.length : null));
-  const next = () => setLightboxIndex((i) => (i !== null ? (i + 1) % PHOTOS.length : null));
+  const prev = () => setLightboxIndex((i) => (i !== null ? (i - 1 + filtered.length) % filtered.length : null));
+  const next = () => setLightboxIndex((i) => (i !== null ? (i + 1) % filtered.length : null));
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -65,7 +88,7 @@ export default function PhotoPage() {
           paddingBottom: "clamp(2rem, 4vw, 3rem)",
         }}
       >
-        <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}>
+        <div style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }} className="flex items-end justify-between">
           <motion.p
             className="font-mono text-[10px] tracking-[0.3em] uppercase"
             style={{ color: "var(--fg-subtle)" }}
@@ -75,6 +98,23 @@ export default function PhotoPage() {
           >
             Photography
           </motion.p>
+          <motion.div
+            className="flex gap-4"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            {FILTERS.map((f) => (
+              <button
+                key={f.label}
+                onClick={() => { setActiveFilter(f.value); setLightboxIndex(null); }}
+                className="font-mono text-[10px] tracking-[0.3em] uppercase transition-colors duration-200"
+                style={{ color: activeFilter === f.value ? "var(--fg)" : "var(--fg-faint)" }}
+              >
+                {f.label}
+              </button>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -91,7 +131,7 @@ export default function PhotoPage() {
           style={{ columnGap: "clamp(1rem, 2vw, 2rem)" }}
           className="masonry"
         >
-          {PHOTOS.map((photo, i) => (
+          {filtered.map((photo, i) => (
             <motion.div
               key={photo.src}
               initial={{ opacity: 0 }}
@@ -124,7 +164,7 @@ export default function PhotoPage() {
           {/* Top bar */}
           <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 py-6" onClick={(e) => e.stopPropagation()}>
             <span className="font-mono text-[10px] tracking-[0.2em]" style={{ color: "rgba(255,255,255,0.35)" }}>
-              {lightboxIndex + 1} / {PHOTOS.length}
+              {lightboxIndex + 1} / {filtered.length}
             </span>
             <button
               className="font-mono text-[10px] tracking-[0.2em] uppercase transition-colors duration-200"
