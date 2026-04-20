@@ -11,6 +11,7 @@ export default function Footer() {
         paddingRight: "clamp(2rem, 6vw, 6rem)",
         paddingTop: "2.5rem",
         paddingBottom: "2.5rem",
+        position: "relative",
       }}
     >
       <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-10">
@@ -52,6 +53,9 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <p className="font-mono font-bold text-[10px] tracking-[0.15em]" style={{ color: "var(--fg-faint)", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+        BUILT BY SHIPPS
+      </p>
     </footer>
   );
 }
