@@ -6,7 +6,6 @@ const SERVICES = [
   "Design",
   "Creative Direction",
   "Events",
-  "AI Site Development",
   "XYZ",
 ];
 
