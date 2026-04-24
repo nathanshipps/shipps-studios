@@ -11,6 +11,7 @@ export interface Project {
   slug: string;
   title: string;
   category: string;
+  tags?: string[];
   year: number;
   client: string;
   description: string;
@@ -41,6 +42,7 @@ export const projects: Project[] = [
     slug: "the-columbian",
     title: "The Columbian",
     category: "Brand Campaign",
+    tags: ["Brand Campaign", "Video"],
     year: 2025,
     client: "The Columbian",
     description:
@@ -123,7 +125,7 @@ export const projects: Project[] = [
   {
     slug: "dream-the-museum",
     title: "Dream The Museum",
-    category: "Campaign Film",
+    category: "Video",
     year: 2024,
     client: "Columbia Play Project",
     description:
@@ -278,7 +280,7 @@ export const projects: Project[] = [
   {
     slug: "on-water",
     title: "onWater",
-    category: "Brand Film",
+    category: "Motion Design",
     year: 2025,
     client: "onWater",
     description:
@@ -324,7 +326,7 @@ export const projects: Project[] = [
   {
     slug: "terra",
     title: "The River Sessions",
-    category: "Concert Film",
+    category: "Video",
     year: 2024,
     client: "River Sessions",
     description:
@@ -367,7 +369,7 @@ export const projects: Project[] = [
   {
     slug: "riffle-ranch",
     title: "Riffle Ranch",
-    category: "Brand Film",
+    category: "Video",
     year: 2025,
     client: "Riffle Ranch",
     description:

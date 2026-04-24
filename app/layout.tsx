@@ -33,6 +33,7 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
+
 export const metadata: Metadata = {
   title: "Nate Shipps",
   description: "Filmmaker. Director. Storyteller.",
