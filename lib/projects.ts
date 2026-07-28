@@ -48,7 +48,7 @@ export const projects: Project[] = [
     description:
       "A brand campaign for one of the Pacific Northwest's oldest newspapers — showing the paper as part of people's lives, not a relic of the past.",
     thumbnail: "/images/ColumbianBrandShoot-18.jpg",
-    hero: { type: "vimeo", id: "1146056329" },
+    hero: { type: "youtube", id: "OFwNBvXFxWU" },
     caseStudy: {
       overview:
         "The Columbian has been telling the Pacific Northwest's story for over 130 years. They needed a brand campaign that honored that history without getting buried by it — content that showed the paper as part of people's lives, not a relic of the past.",

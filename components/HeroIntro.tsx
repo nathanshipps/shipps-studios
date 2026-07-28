@@ -8,9 +8,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // Cards: index 0 = back of stack, index 4 = front (first visible)
-// Each card is either a vimeo video or an image
+// Each card is either a vimeo video, a youtube video, or an image
 type CardMedia = (
   | { type: "vimeo"; id: string; hash?: string }
+  | { type: "youtube"; id: string }
   | { type: "image"; src: string; alt?: string }
 ) & { href?: string; label?: string; year?: string };
 
@@ -19,7 +20,7 @@ const CARDS: CardMedia[] = [
   { type: "vimeo", id: "1152006062",                                               href: "/work/on-water",             label: "onWater",               year: "2025" },
   { type: "vimeo", id: "1033218792",                                               href: "/work/dream-the-museum",      label: "Dream The Museum",      year: "2024" },
   { type: "vimeo", id: "1106263702", hash: "b3042e8f6d",                          href: "/work/riffle-ranch",          label: "Riffle Ranch",          year: "2025" },
-  { type: "vimeo", id: "1146056329",                                               href: "/work/the-columbian",         label: "The Columbian",         year: "2025" },
+  { type: "youtube", id: "OFwNBvXFxWU",                                            href: "/work/the-columbian",         label: "The Columbian",         year: "2025" },
 ];
 
 const HERO_META = {
@@ -215,6 +216,25 @@ export default function HeroIntro() {
               <iframe
                 ref={i === CARD_COUNT - 1 ? iframeRef : undefined}
                 src={`https://player.vimeo.com/video/${(CARDS[i] as Extract<CardMedia, { type: "vimeo" }>).id}?autoplay=1&muted=1&loop=1&background=1&byline=0&title=0&portrait=0&dnt=1${(CARDS[i] as Extract<CardMedia, { type: "vimeo" }>).hash ? `&h=${(CARDS[i] as Extract<CardMedia, { type: "vimeo" }>).hash}` : ""}`}
+                allow="autoplay; fullscreen"
+                style={{
+                  border: "none",
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: "177.78vh",
+                  height: "56.25vw",
+                  minWidth: "100%",
+                  minHeight: "100%",
+                  transform: "translate(-50%, -50%)",
+                  pointerEvents: "none",
+                }}
+                title={`Card ${i + 1}`}
+              />
+            ) : CARDS[i].type === "youtube" ? (
+              <iframe
+                ref={i === CARD_COUNT - 1 ? iframeRef : undefined}
+                src={`https://www.youtube.com/embed/${(CARDS[i] as Extract<CardMedia, { type: "youtube" }>).id}?autoplay=1&mute=1&loop=1&playlist=${(CARDS[i] as Extract<CardMedia, { type: "youtube" }>).id}&controls=0&rel=0&modestbranding=1`}
                 allow="autoplay; fullscreen"
                 style={{
                   border: "none",

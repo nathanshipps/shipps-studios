@@ -3,11 +3,12 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import VideoEmbed from "@/components/VideoEmbed";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Test: same video repeated
-const VIMEO_ID = "1146056329";
+const YOUTUBE_ID = "OFwNBvXFxWU";
 const CARD_COUNT = 5;
 
 // Stack offset: back cards are higher, front card is lowest
@@ -116,11 +117,11 @@ export default function VideoStack() {
               willChange: "transform, opacity",
             }}
           >
-            <iframe
-              src={`https://player.vimeo.com/video/${VIMEO_ID}?autoplay=1&muted=1&loop=1&background=1&dnt=1`}
-              style={{ width: "100%", height: "100%", border: "none", display: "block" }}
-              allow="autoplay; fullscreen"
-              title={`Card ${i + 1}`}
+            <VideoEmbed
+              source={{ type: "youtube", id: YOUTUBE_ID }}
+              autoplay
+              muted
+              loop
             />
           </div>
         ))}
