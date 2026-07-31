@@ -44,8 +44,53 @@ export default function HeroIntro() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const metaRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const ytIframeRef = useRef<HTMLIFrameElement>(null);
   const startTimeRef = useRef(Date.now());
   const transitionFiredRef = useRef(false);
+
+  // ── Seamless YouTube loop: native loop=1/playlist looping flashes the
+  // play/pause UI for a frame on restart, so drive the restart via the JS
+  // API instead (seekTo + play, no native "ended" state reached). ──
+  useEffect(() => {
+    if (!ytIframeRef.current) return;
+
+    let player: YT.Player | null = null;
+    let cancelled = false;
+
+    const createPlayer = () => {
+      if (cancelled || !ytIframeRef.current) return;
+      player = new window.YT.Player(ytIframeRef.current, {
+        events: {
+          onStateChange: (event: YT.OnStateChangeEvent) => {
+            if (event.data === window.YT.PlayerState.ENDED) {
+              event.target.seekTo(0, true);
+              event.target.playVideo();
+            }
+          },
+        },
+      });
+    };
+
+    if (window.YT && window.YT.Player) {
+      createPlayer();
+    } else {
+      const previousCallback = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        previousCallback?.();
+        createPlayer();
+      };
+      if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+        const script = document.createElement("script");
+        script.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(script);
+      }
+    }
+
+    return () => {
+      cancelled = true;
+      player?.destroy?.();
+    };
+  }, []);
 
   useEffect(() => {
     // ── Set initial card stack positions ──
@@ -233,8 +278,11 @@ export default function HeroIntro() {
               />
             ) : CARDS[i].type === "youtube" ? (
               <iframe
-                ref={i === CARD_COUNT - 1 ? iframeRef : undefined}
-                src={`https://www.youtube.com/embed/${(CARDS[i] as Extract<CardMedia, { type: "youtube" }>).id}?autoplay=1&mute=1&loop=1&playlist=${(CARDS[i] as Extract<CardMedia, { type: "youtube" }>).id}&controls=0&rel=0&modestbranding=1`}
+                ref={(el) => {
+                  ytIframeRef.current = el;
+                  if (i === CARD_COUNT - 1) iframeRef.current = el;
+                }}
+                src={`https://www.youtube.com/embed/${(CARDS[i] as Extract<CardMedia, { type: "youtube" }>).id}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&enablejsapi=1`}
                 allow="autoplay; fullscreen"
                 style={{
                   border: "none",
