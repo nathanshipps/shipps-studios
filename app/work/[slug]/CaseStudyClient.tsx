@@ -103,6 +103,21 @@ export default function CaseStudyClient({ project }: { project: Project }) {
             <p className="mt-2 text-sm" style={{ color: "var(--fg-body)" }}>{project.category}</p>
           </div>
         </motion.div>
+
+        {project.caseStudy.credits && project.caseStudy.credits.length > 0 && (
+          <motion.div
+            className="flex flex-wrap gap-x-12 gap-y-4 pt-6 mt-6"
+            style={{ borderTop: "1px solid var(--border)" }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.35 }}
+          >
+            {project.caseStudy.credits.map((c) => (
+              <div key={c.role}>
+                <Label>{c.role}</Label>
+                <p className="mt-2 text-sm" style={{ color: "var(--fg-body)" }}>{c.name}</p>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </section>
 
       {/* ── HERO MEDIA ── */}

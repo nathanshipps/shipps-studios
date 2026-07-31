@@ -20,6 +20,7 @@ export interface Project {
   caseStudy: {
     overview: string;
     role: string[];
+    credits?: { role: string; name: string }[];
     challenge: string;
     solution: string;
     sections: CaseStudySection[];
@@ -77,12 +78,6 @@ export const projects: Project[] = [
             { url: "/images/ColumbianBrandShoot-07.jpg", alt: "Woman reading The Columbian in living room" },
             { url: "/images/ColumbianBrandShoot-27.jpg", alt: "Man reading The Columbian in study with American flag" },
           ],
-        },
-        {
-          type: "image",
-          url: "/images/ColumbianBrandShoot-88.jpg",
-          alt: "Man reading The Columbian inside the printing press facility",
-          caption: "The press floor — where it starts.",
         },
         {
           type: "pair",
@@ -208,6 +203,7 @@ export const projects: Project[] = [
     caseStudy: {
       overview: "Wool & Prince makes clothing from merino wool and natural fibers — built to wear hard, wash less, and get better with age. They needed content that matched the product's honesty. No mountain peaks, no golden hour. Just real clothes doing real things.",
       role: ["Director", "Creative Direction", "Design", "Strategy"],
+      credits: [{ role: "Photography", name: "Mayne Marketing" }],
       challenge: "Most clothing brands default to aspirational fantasy. Wool & Prince's audience doesn't buy that — they buy things that last. The challenge was making functional clothing feel genuinely compelling without reaching for clichés.",
       solution: "I started with a full brand audit — dug into how Wool & Prince was showing up, where the messaging was falling flat, and what the brand actually stood for at its core. From that I built the strategy and concepted the photo shoot as the first place to put it into practice. I shot on a working farm in the Pacific Northwest. Muddy ground, overcast skies, sheep that had no interest in my shot list. I put the clothes through it and photographed what happened honestly.",
       sections: [

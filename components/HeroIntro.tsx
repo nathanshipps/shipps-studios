@@ -16,11 +16,11 @@ type CardMedia = (
 ) & { href?: string; label?: string; year?: string };
 
 const CARDS: CardMedia[] = [
-  { type: "image", src: "/images/w&p - test shoot-27.jpg", alt: "W&P Test Shoot", href: "/work/wool-and-prince",     label: "Wool & Prince",         year: "2024" },
+  { type: "youtube", id: "OFwNBvXFxWU",                                            href: "/work/the-columbian",         label: "The Columbian",         year: "2025" },
   { type: "vimeo", id: "1152006062",                                               href: "/work/on-water",             label: "onWater",               year: "2025" },
   { type: "vimeo", id: "1033218792",                                               href: "/work/dream-the-museum",      label: "Dream The Museum",      year: "2024" },
   { type: "vimeo", id: "1106263702", hash: "b3042e8f6d",                          href: "/work/riffle-ranch",          label: "Riffle Ranch",          year: "2025" },
-  { type: "youtube", id: "OFwNBvXFxWU",                                            href: "/work/the-columbian",         label: "The Columbian",         year: "2025" },
+  { type: "image", src: "/images/w&p - test shoot-27.jpg", alt: "W&P Test Shoot", href: "/work/wool-and-prince",     label: "Wool & Prince",         year: "2024" },
 ];
 
 const HERO_META = {
